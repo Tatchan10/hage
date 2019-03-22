@@ -10,7 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190118013439) do
+ActiveRecord::Schema.define(version: 20190316043933) do
+
+  create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "introduce"
+    t.string   "image"
+    t.integer  "price"
+    t.string   "date"
+    t.string   "capacity"
+    t.integer  "junre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.integer  "point"
+    t.string   "image"
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_reviews_on_product_id", using: :btree
+    t.index ["user_id", "product_id"], name: "index_reviews_on_user_id_and_product_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -21,6 +46,9 @@ ActiveRecord::Schema.define(version: 20190118013439) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "image_user"
   end
 
+  add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "users"
 end

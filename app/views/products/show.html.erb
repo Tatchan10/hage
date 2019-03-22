@@ -1,0 +1,25 @@
+<div class="row">
+  <aside class="col-xs-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @product.name %></h3>
+      </div>
+      <div class="panel-body">
+         <% if @product.image.present? %>
+           <%= image_tag @product.image.url %>
+          <% else %>
+            <div class="user">
+              <%=  image_tag("/user_images/wanko.jpg", :size => "400×400") %>
+            </div>
+          <% end %>
+      </div>
+    </div>
+  </aside>
+  <div class="col-xs-8">
+    <ul class="nav nav-tabs nav-justified">
+      <li><a href="#">Microposts</a></li>
+      <li><a href="#">Followings</a></li>
+      <li><a href="#">Followers</a></li>
+    </ul>
+  </div>
+</div>

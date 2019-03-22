@@ -6,8 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.order('created_at DESC').page(params[:page])
-    counts(@user)
+    @reviews = @user.reviews.order('created_at DESC').page(params[:page])
   end
 
   def new
@@ -37,10 +36,11 @@ class UsersController < ApplicationController
  
     #編集しようとしてるユーザーがログインユーザーとイコールかをチェック
   if current_user == @user
-    if params[:image]
-      @user.image_name = "#{@user.id}.jpg"
-      image = params[:image]
-      File.binwrite("user_images/#{@user.image_name}", image.read)
+    
+    if params[:image_user]
+      @user.image = "#{@user.id}.jpg"
+      image = params[:image_user]
+      File.binwrite("user_images/#{@user.image}", image.read)
       flash[:success] = '画像を保存しました。'
     end
  
@@ -73,6 +73,6 @@ class UsersController < ApplicationController
   end
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :introduce, :image_name, :age, :sex)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :introduce, :image_user, :age, :sex)
   end
 end

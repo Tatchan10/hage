@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+ /* users/index ================================*/
+.media-left img {
+  width: 60px;
+  height: 60px;
+  border-radius: 20%;
+  box-shadow: 0 2px 6px #c1ced7;
+  margin: 0 0 10px;
+}
+
+/* users/show ================================ */
+.panel-body img {
+  width: 300px;
+  height: 300px;
+  text-align: center;
+}
